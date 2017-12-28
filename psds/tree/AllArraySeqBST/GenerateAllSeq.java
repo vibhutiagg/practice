@@ -5,7 +5,16 @@ import java.util.List;
 
 
 public class GenerateAllSeq {
-  private List<List<Node>> sequences = new ArrayList<>();
+  private List<List<Node>> sequences;
+
+  public GenerateAllSeq(BinaryTree binaryTree) {
+    sequences = new ArrayList<>();
+
+    List<Node> ancestors = new ArrayList<>();
+    List<Node> children = new ArrayList<>();
+
+    generateSeq(ancestors, children, binaryTree.root);
+  }
 
   public void generateSeq(List<Node> ancestors, List<Node> children, Node current){
     ancestors.add(current);
@@ -32,12 +41,7 @@ public class GenerateAllSeq {
     }
   }
 
-  public void printSeq(BinaryTree binaryTree) {
-    List<Node> ancestors = new ArrayList<>();
-    List<Node> children = new ArrayList<>();
-
-    generateSeq(ancestors, children, binaryTree.root);
-
+  public void printSeq() {
     for (List<Node> sequence : sequences){
       for(Node node : sequence) {
         System.out.print(node.data + "   ");
@@ -63,6 +67,6 @@ public class GenerateAllSeq {
     binaryTree.root.right.left = new Node(25);
     binaryTree.root.right.right = new Node(35);
 
-    new GenerateAllSeq().printSeq(binaryTree);
+    new GenerateAllSeq(binaryTree).printSeq();
   }
 }
